@@ -1,0 +1,78 @@
+@Require Tailoring
+(260) Linen Cloth
+(130) Bolt of Linen Cloth
+70 Heavy Linen Gloves
+75 Reinforced Linen Cape
+
+@Require Tailoring Journeyman
+(135) Wool Cloth
+(45) Bolt of Woolen Cloth
+110 Simple Kilt
+125 Double-stitched Woolen Shoulders
+
+@Require Tailoring Expert
+(780) Silk Cloth
+(195) Bolt of Silk Cloth
+160 Azure Silk Hood
+170 Silk Headband
+175 Formal White Shirt
+(396) Mageweave Cloth
+(99) Bolt of Mageweave
+200 Crimson Silk Vest
+215 Crimson Silk Pantaloons
+220 Black Mageweave Leggings
+230 Black Mageweave Gloves
+250 Black Mageweave Headband
+
+@Require Tailoring Artisan.
+(780) Runecloth
+(195) Bolt of Runecloth
+280 Runecloth Belt
+295 Runecloth Gloves
+300 Runecloth Headband
+
+@Require Tailoring Master
+(790) Netherweave Cloth
+@Shopping (20) Knothide Leather
+(158) Bolt of Netherweave
+330 Netherweave Bag
+335 Netherweave Pants
+345 Netherweave Boots
+350 Netherweave Tunic
+
+@Require Tailoring Grand Master
+(1200) Frostweave Cloth
+(240) Bolt of Frostweave
+380 Frostwoven Belt
+385 Frostwoven Boots
+395 Frostwoven Cowl
+400 Duskweave Belt
+(20) Infinite Dust
+(10) Bolt of Imbued Frostweave
+405 Duskweave Leggings
+410 Duskweave Wristwraps
+415 Duskweave Gloves
+425 Ebonweave, Moonshroud, Spellweave
+
+@Require Tailoring Illustrious
+(885) Embersilk Cloth
+(177) Bolt of Embersilk Cloth
+455 Deathsilk Bracers
+460 Deathsilk Boots
+465 Deathsilk Leggings
+470 Deathsilk Cowl
+475 Spiritmend Belt
+480 Spiritmend Boots
+(30) Hypnotic Dust
+484 Spiritmend Leggings
+494 Embersilk Bag
+500 Spiritmend Robe
+
+@Require Zen Tailoring
+(450) Windwool Cloth
+(90) Bolt of Windwool Cloth 
+547 Windwool Gloves, Windwool Shoulders
+553 Windwool Boots
+561 Windwool Pants
+577 Windwool Hood
+(1) Spirit of Harmony
