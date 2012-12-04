@@ -6,4 +6,9 @@ for line in skillFile:lines() do
 end
 skillFile:close()
 
-for i, line in ipairs(lines) do print(line) end
+local input = io.read()
+while input ~= "END" do
+	print(input .. "~~~")
+	io.flush()
+	input = io.read()
+end
