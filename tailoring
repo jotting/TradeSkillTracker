@@ -1,4 +1,7 @@
-@Require Tailoring
+@Require Apprentice Tailoring
+@Reagent (20) Coarse Thread
+@Reagent (2) Blue Dye
+@Reagent Red Dye
 (260) Linen Cloth
 (130) Bolt of Linen Cloth
 70 Heavy Linen Gloves
@@ -33,7 +36,6 @@
 
 @Require Tailoring Master
 (790) Netherweave Cloth
-@Shopping (20) Knothide Leather
 (158) Bolt of Netherweave
 330 Netherweave Bag
 335 Netherweave Pants
