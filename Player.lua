@@ -1,16 +1,9 @@
-Player = {}
-Player.__index = Player
-
-function Player.create()
-	local player = {}
-	setmetatable(player, Player)
-	player.skill1 = nil
-	player.skill2 = nil
-	player.fishing = nil
-	player.items = {}
-
-	return player
-end
+Player = {
+	skill1 = nil,
+	skill2 = nil,
+	fishing = nil,
+	items = {}
+}
 
 function Player:trainSkill(skill)
 	print("Train skill")

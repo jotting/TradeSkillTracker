@@ -1,6 +1,5 @@
 require 'tradeSkillTracker'
 require 'Player'
-local player = Player.create()
 
 function main()
 	TSTracker:processFile("tailoring")
@@ -27,13 +26,13 @@ function startConsole()
 		elseif command == "ls" then
 			TSTracker:updateWindow()
 		elseif command == "player" then
-			for k,v in pairs(player) do
+			for k,v in pairs(Player) do
 				if k == "items" then
 					print("items:")
 					for k2, v2 in pairs(v) do
 						print(k2,v2.count)
 					end
-				else
+				elseif not type(v) == "function" then
 					print(k,v)
 				end
 			end
@@ -65,50 +64,50 @@ end
 
 function trained(training, skill)
 	if training == nil or skill == nil then return end
-	player:trainSkill(skill)
+	Player:trainSkill(skill)
 
-	if player.skill1.name == skill then
-		player.skill1.training = training
-	elseif player.skill2.name == skill then
-		player.skill2.training = training
+	if Player.skill1.name == skill then
+		Player.skill1.training = training
+	elseif Player.skill2.name == skill then
+		Player.skill2.training = training
 	end
 	print("trained: "..training.." "..skill)
 
-	--TSTracker:onTrained(skill)
+	TSTracker:onTrained(skill)
 end
 
 function skillUp(amount, skill)
 	if amount == nil or amount == "" then amount = 1 end
 	if skill == nil or skill == "" then 
-		if player.skill1 == nil then return
-		else skill = player.skill1.name end
+		if Player.skill1 == nil then return
+		else skill = Player.skill1.name end
 	end
 
-	if skill == player.skill1.name then
-		player.skill1.level = player.skill1.level + amount
-	elseif player.skill2 ~= nil and skill == player.skill2.name then
-		player.skill2.level = player.skill2.level + amount
+	if skill == Player.skill1.name then
+		Player.skill1.level = Player.skill1.level + amount
+	elseif Player.skill2 ~= nil and skill == Player.skill2.name then
+		Player.skill2.level = Player.skill2.level + amount
 	end
 	print(skill.." +"..tostring(amount))
 
-	--TSTracker:onSkillUp(player.skill)
+	TSTracker:onSkillUp(skill, currentLevel)
 end
 
 function item(amount, item)
 	if item == nil or item == "" or amount == nil or amount == "" then return end
 	amount = tonumber(amount)
 	if amount == 0 then
-		player.items[item] = nil
+		Player.items[item] = nil
 	else
-		if player.items[item] == nil then
-			player.items[item] = {count = 0}
+		if Player.items[item] == nil then
+			Player.items[item] = {count = 0}
 		end
 
-		player.items[item].count = amount
+		Player.items[item].count = amount
 	end
 	print(amount.." "..item.."(s) now owned.")
 
-	--TSTracker:onAcquired(item)
+	TSTracker:onAcquired(item)
 end
 
 -- Run the program

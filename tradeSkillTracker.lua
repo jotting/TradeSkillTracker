@@ -1,6 +1,5 @@
 require 'TSEntry'
 TSTracker = {skillPath=nil}
-Player = {skill=nil, skillLevel=1, items={}}
 
 function TSTracker:updateSkillPath()
 	local index = self.skillPath.current
@@ -48,12 +47,12 @@ function TSTracker:onTrained(skillName)
 	end
 end
 
-function TSTracker:onSkillUp(skill)
-	if self.skillPath == nil or self.skillPath.skill ~= Player.skill then return end
+function TSTracker:onSkillUp(skill, currentLevel)
+	if self.skillPath == nil or self.skillPath.skill ~= skill then return end
 
 	local i = self.skillPath.current
 	local skillLevel = self.skillPath[i].skillLevel
-	if skillLevel ~= nil and skillLevel <= Player.skillLevel then
+	if skillLevel ~= nil and skillLevel <= currentLevel then
 		TSTracker:updateSkillPath()
 	end
 end
