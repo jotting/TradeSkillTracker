@@ -1,5 +1,7 @@
+require 'test'
 require 'tradeSkillTracker'
-require 'Player'
+require 'player'
+require 'eventProcessor'
 
 function main()
 	TSTracker:processFile("tailoring")
@@ -18,11 +20,17 @@ function startConsole()
 		command = string.lower(command)
 
 		if command == "train" then
-			trained(argument, argument2)
+			TestUtils:trained(argument, argument2)
 		elseif command == "skill" then
-			skillUp(argument, argument2)
+			TestUtils:skillUp(argument, argument2)
 		elseif command == "item" then
-			item(argument, argument2)
+			TestUtils:item(argument, argument2, "receive item")
+		elseif command == "loot" then
+			TestUtils:item(argument, argument2, "receive loot")
+		elseif command == "created" then
+			TestUtils:item(argument, argument2, "create")
+		elseif command == "won" then
+			TestUtils:item(argument, argument2, "won")
 		elseif command == "ls" then
 			TSTracker:updateWindow()
 		elseif command == "player" then
@@ -30,7 +38,12 @@ function startConsole()
 				if k == "items" then
 					print("items:")
 					for k2, v2 in pairs(v) do
-						print(k2,v2.count)
+						print('\t'..k2,v2.count)
+					end
+				elseif string.find(k, "^skill") then
+					print(k)
+					for k2, v2 in pairs(v) do
+						print('\t'..k2,v2)
 					end
 				elseif not type(v) == "function" then
 					print(k,v)
@@ -41,6 +54,9 @@ function startConsole()
 			print("  train <training level> <skill>")
 			print("  skill [number] [skill]")
 			print("  item [number] [item]")
+			print("  loot [number] [item]")
+			print("  created [number] [item]")
+			print("  won [number] [item]")
 			print("  ls")
 			print("----")
 		end
@@ -60,54 +76,6 @@ function isStop(input)
 	end
 
 	return false
-end
-
-function trained(training, skill)
-	if training == nil or skill == nil then return end
-	Player:trainSkill(skill)
-
-	if Player.skill1.name == skill then
-		Player.skill1.training = training
-	elseif Player.skill2.name == skill then
-		Player.skill2.training = training
-	end
-	print("trained: "..training.." "..skill)
-
-	TSTracker:onTrained(skill)
-end
-
-function skillUp(amount, skill)
-	if amount == nil or amount == "" then amount = 1 end
-	if skill == nil or skill == "" then 
-		if Player.skill1 == nil then return
-		else skill = Player.skill1.name end
-	end
-
-	if skill == Player.skill1.name then
-		Player.skill1.level = Player.skill1.level + amount
-	elseif Player.skill2 ~= nil and skill == Player.skill2.name then
-		Player.skill2.level = Player.skill2.level + amount
-	end
-	print(skill.." +"..tostring(amount))
-
-	TSTracker:onSkillUp(skill, currentLevel)
-end
-
-function item(amount, item)
-	if item == nil or item == "" or amount == nil or amount == "" then return end
-	amount = tonumber(amount)
-	if amount == 0 then
-		Player.items[item] = nil
-	else
-		if Player.items[item] == nil then
-			Player.items[item] = {count = 0}
-		end
-
-		Player.items[item].count = amount
-	end
-	print(amount.." "..item.."(s) now owned.")
-
-	TSTracker:onAcquired(item)
 end
 
 -- Run the program

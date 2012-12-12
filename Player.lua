@@ -6,7 +6,6 @@ Player = {
 }
 
 function Player:trainSkill(skill)
-	print("Train skill")
 	if self.skill1 == nil then
 		self.skill1 = Skill.create(skill)
 	elseif self.skill2 == nil then
@@ -38,4 +37,8 @@ function Skill.create(name)
 	skill.level = 1
 
 	return skill
+end
+
+function Skill:getSkill()
+	return self.training.." "..self.name
 end

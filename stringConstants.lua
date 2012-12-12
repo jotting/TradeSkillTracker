@@ -1,0 +1,6 @@
+TST_GAIN_A_SKILL = "You have gained the (.*) skill\."
+TST_GAIN_SKILL_RANK = "Your skill in (.*) has increased to (.*)\."
+TST_RECEIVE_LOOT = "You receive loot: (.+)\."
+TST_RECEIVE_ITEM = "You receive item: (.+)\."
+TST_CREATE_ITEM = "You create: (.+)\."
+TST_WON_ITEM = "You won: (.+)\."

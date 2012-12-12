@@ -1,4 +1,5 @@
 require 'TSEntry'
+require 'player'
 TSTracker = {skillPath=nil}
 
 function TSTracker:updateSkillPath()
@@ -13,13 +14,19 @@ function TSTracker:updateSkillPath()
 --		craftable = nil
 --	}
 	local gotoNext = false
-	if entry.requiredSkill ~= nil and entry.requiredSkill == Player.skill then
-		gotoNext = true
-	elseif entry.reagent ~= nil and Player.items[entry.reagent] ~= nil
+	if (entry.requiredSkill) then
+		if (Player.skill1 and entry.requiredSkill == Player.skill1:getSkill()) or
+			(Player.skill2 and entry.requiredSkill == Player.skill2:getSkill()) then
+			gotoNext = true
+		end
+	elseif entry.reagent and Player.items[entry.reagent]
 		and entry.count <= Player.items[entry.reagent].count then
 		gotoNext = true
-	elseif entry.craftable ~= nil and entry.skillLevel <= Player.skillLevel then
-		gotoNext = true
+	elseif entry.craftable and entry.skillLevel then
+		if (Player.skill1 and entry.skillLevel <= Player.skill1.level) or
+			(Player.skill2 and entry.skillLevel <= Player.skill2.level) then
+			gotoNext = true
+		end
 	end
 
 	if gotoNext then
@@ -57,18 +64,19 @@ function TSTracker:onSkillUp(skill, currentLevel)
 	end
 end
 
-function TSTracker:onAcquired(acquiredItem)
+function TSTracker:onAcquired(itemName)
 	if self.skillPath == nil then return end
-
 	local i = self.skillPath.current
 	local entry = self.skillPath[i]
-	if entry.reagent ~= nil and entry.reagent == acquiredItem
-		and entry.count ~= nil and Player.items[acquiredItem] ~= nil then
-		local itemCount = Player.items[acquiredItem].count
+
+	if entry.reagent ~= nil and entry.reagent == itemName
+		and entry.count ~= nil and Player.items[itemName] ~= nil then
+
+		local itemCount = Player.items[itemName].count
 		if entry.count <= itemCount then
 			TSTracker:updateSkillPath()
 		else
-			print(entry.count.." / "..itemCount.." - "..entry.reagent)
+			print(itemCount.." / "..entry.count.." - "..entry.reagent)
 		end
 	end
 end
@@ -110,4 +118,3 @@ function TSTracker:processLine(line)
 		return entry:setSkillLevel(number):setCraftable(items)
 	end
 end
-
